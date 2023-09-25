@@ -1,13 +1,12 @@
-const express = require("express")
-const dotenv = require("dotenv")
-const mongoose = require("mongoose");
+import express from "express";
+import { config } from "dotenv";
+import { connect } from "mongoose";
 
 const app = express()
-dotenv.config();
+config();
 const port = 1000 || process.env.PORT
 const dbCon = process.env.DB
-mongoose
-    .connect(dbCon)
+connect(dbCon)
     .then((result) => {
         app.listen(port, () => {
             console.log(
