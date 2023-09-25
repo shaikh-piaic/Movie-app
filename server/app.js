@@ -1,9 +1,11 @@
 import express from "express";
 import { config } from "dotenv";
 import { connect } from "mongoose";
-
+import movies from "./routes/movies.js"
 const app = express()
 config();
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 const port = 1000 || process.env.PORT
 const dbCon = process.env.DB
 connect(dbCon)
@@ -17,3 +19,6 @@ connect(dbCon)
     .catch((err) => {
         console.log(`DB Connection Error ${err}`);
     });
+
+
+app.use("/api", movies)
