@@ -3,6 +3,7 @@ import { config } from "dotenv";
 import { connect } from "mongoose";
 import movies from "./routes/movies.js"
 import genre from "./routes/genre.js"
+import user from "./routes/user.js"
 const app = express()
 config();
 app.use(express.urlencoded({ extended: true }))
@@ -24,3 +25,4 @@ connect(dbCon)
 
 app.use("/api", movies)
 app.use("/api", genre)
+app.use("/api", user)
