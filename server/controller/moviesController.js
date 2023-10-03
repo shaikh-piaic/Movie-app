@@ -38,16 +38,14 @@ export const postMovies = async (req, res) => {
 }
 export const putMovies = async (req, res) => {
     try {
-        const { title, description, image, rating, genre, runtime } = req.body
-        const isMovieExisting = await Movies.findByIdAndUpdate({ _id: req.params.movieId }, req.body, { new: true })
+        const movie = await Movies.findOne({ _id: req.params.movieId })
 
         res.json({
-            message: "Movie Updated Successfully",
-            updatedMovie: isMovieExisting
+            movie
         })
     } catch (error) {
         res.json({
-            error: "Failed to Update the Movie",
+            error: "Failed to Get the Movie",
             message: error.message,
         })
     }

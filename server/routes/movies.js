@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get("/movies", getMovies)
 router.post("/movies/addmovie", postMovies)
-router.put("/movies/:movieId", putMovies)
+router.get("/movies/:movieId", putMovies)
 router.delete("/movies/:movieId", deleteMovies)
 
 export default router

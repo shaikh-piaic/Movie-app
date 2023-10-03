@@ -8,6 +8,10 @@ const secretKey = process.env.JWT_TOKEN || 'your-secret-key';
 export const Signup = async (req, res) => {
     const { username, password } = req.body;
     try {
+        const user = await User.findOne({ username })
+        if (user) {
+            return res.json({ message: "User Already Exists" })
+        }
         if (!username || !password) {
             return res.json({ message: 'Please provide both username and password.' });
         }
@@ -18,7 +22,7 @@ export const Signup = async (req, res) => {
         const newUser = new User({ username, password: hashedPassword });
 
         await newUser.save()
-        res.json({ message: 'User created successfully.' });
+        res.json({ success: 'User created successfully.' });
     } catch (error) {
 
         res.json({ message: 'Error while creating the user.' });
